@@ -27,15 +27,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        sharedPref = getSharedPreferences("myKey", MODE_PRIVATE);
-        editor = sharedPref.edit();
+
         setContentView(R.layout.activity_main);
-        value = sharedPref.getString("new_value", null);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         display = findViewById(R.id.input);
         display.setShowSoftInputOnFocus(false);
 
+    }
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        editor.remove("myKey");
+        editor.clear();
+        editor.commit();
     }
     private void updateText(String toAdd) {
         String old = display.getText().toString();
@@ -153,8 +160,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void ms_btn(View view) {
-        String value = display.getText().toString().trim();
-        editor.putString("new_value", value);
+        sharedPref = getSharedPreferences("myKey", MODE_PRIVATE);
+        editor = sharedPref.edit();
+        value = sharedPref.getString("new_value", null);
+        String val = display.getText().toString().trim();
+        editor.putString("new_value", val);
         editor.apply();
         display.getText().clear();
     }
@@ -181,4 +191,5 @@ public class MainActivity extends AppCompatActivity {
             display.setSelection(cursorPos - 1);
         }
     }
+
 }
