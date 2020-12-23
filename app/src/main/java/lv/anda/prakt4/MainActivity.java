@@ -36,14 +36,7 @@ public class MainActivity extends AppCompatActivity {
         display.setShowSoftInputOnFocus(false);
 
     }
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-        editor.remove("myKey");
-        editor.clear();
-        editor.commit();
-    }
+
     private void updateText(String toAdd) {
         String old = display.getText().toString();
         int cursor = display.getSelectionStart();
