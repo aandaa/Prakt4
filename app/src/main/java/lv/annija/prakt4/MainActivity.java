@@ -156,7 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.btn_ms:
-                savedValue = Integer.parseInt(input.getText().toString());
+                if (!input.getText().toString().isEmpty()){
+                    savedValue = Integer.parseInt(input.getText().toString());
+                }
                 break;
             case R.id.btn_mr:
                 if (savedValue != null){
